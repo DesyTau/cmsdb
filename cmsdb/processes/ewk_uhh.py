@@ -11,7 +11,7 @@ bound and exclusive in the upper bound, i.e. (a, b) means a <= x < b:
 - njets: number of extra jets on generator level (mostly NLO)
 """
 
-__all__ = [  # noqa: F822
+__all__ = [  
     "dy",
     "dy_m4to10",
     "dy_m10to50",
@@ -112,7 +112,7 @@ from cmsdb.util import multiply_xsecs
 dy = Process(
     name="dy",
     id=50000,
-    label="Drell-Yan",
+    label="Z/γ*→ll"
 )
 
 # NNLO cross section, based on:
@@ -152,11 +152,12 @@ dy_m50toinf = dy.add_process(
             "pdf": 14.78,
         }),
         # nnlo
-        13.6: const.n_leps * Number(2091.7, {
+        13.6: Number(6282.6, {
             "scale": (0.008j, 0.013j),
             "pdf": 0.01j,
         }),
     },
+    color="#08519c",
     aux={
         "mll": (50.0, const.inf),
     },
@@ -198,6 +199,7 @@ dy_m10to50 = dy.add_process(
     xsecs={
         13.6: dy_m10to50_nlo_13p6tev_xsec * dy_k_factor_nlo_to_nnlo[13.6],
     },
+    color="#c6dbef",
     aux={
         "mll": (10.0, 50.0),
     },
@@ -220,6 +222,7 @@ dy_m50toinf_0j = dy_m50toinf.add_process(
         # NLO xsec taken from https://xsdb-temp.app.cern.ch/xsdb/?columns=39911424&currentPage=0&pageSize=10&searchQuery=DAS%3DDYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8  # noqa
         13.6: Number(5378, {"tot": 8.007}) * dy_k_factor_nlo_to_nnlo[13.6],
     },
+    color="#9ecae1",
     aux={
         "mll": (50.0, const.inf),
         "njets": (0, 1),
@@ -236,6 +239,7 @@ dy_m50toinf_1j = dy_m50toinf.add_process(
         # 13.6: Number(1017, {"tot": 6.264}) * dy_k_factor_nlo_to_nnlo[13.6],
         13.6: Number(973.1, {"tot": 2.613}) * dy_k_factor_lo_to_nnlo[13.6],
     },
+    color="#4292c6",
     aux={
         "mll": (50.0, const.inf),
         "njets": (1, 2),
@@ -252,6 +256,7 @@ dy_m50toinf_2j = dy_m50toinf.add_process(
         # 13.6: Number(385.5, {"tot": 3.858}) * dy_k_factor_nlo_to_nnlo[13.6],
         13.6: Number(312.4, {"tot": 0.915}) * dy_k_factor_lo_to_nnlo[13.6],
     },
+    color="#2171b5",
     aux={
         "mll": (50.0, const.inf),
         "njets": (2, 3),
@@ -814,11 +819,50 @@ dy_mumu = dy.add_process(
 dy_tautau = dy.add_process(
     name="dy_tautau",
     id=50300,
+    color="#C84145",
+    label=f"Z/\gamma* \rightarrow \tau\tau",
     aux={
         "lep_id": 15,
     },
 )
+# dy_tautau_m50toinf_0j = dy_tautau.add_process(
+#     name="dy_tautau_m50toinf_0j",
+#     id=51650,
+#     xsecs={
+#         13.6: Number(1664.684),
+#     },
+#     color="#b99ad9",  # light shade
+#     aux={
+#         "lep_id": 15,
+#         "mll": (50.0, const.inf),
+#     },
+# )
 
+# dy_tautau_m50toinf_1j = dy_tautau.add_process(
+#     name="dy_tautau_m50toinf_1j",
+#     id=51651,
+#     xsecs={
+#         13.6: Number(316.240),
+#     },
+#     color="#8f63c9",  # medium shade
+#     aux={
+#         "lep_id": 15,
+#         "mll": (50.0, const.inf),
+#     },
+# )
+
+# dy_tautau_m50toinf_2j = dy_tautau.add_process(
+#     name="dy_tautau_m50toinf_2j",
+#     id=51652,
+#     xsecs={
+#         13.6: Number(116.472),
+#     },
+#     color="#6a3fb8",  # dark shade
+#     aux={
+#         "lep_id": 15,
+#         "mll": (50.0, const.inf),
+#     },
+# )
 # 2 e
 dy_ee_m10to50 = dy_ee.add_process(
     name="dy_ee_m10to50",
@@ -1681,6 +1725,7 @@ w_lnu = w.add_process(
         # addition necessary due to absence of combined value
         13.6: wm_lnu_xs_13p6 + wp_lnu_xs_13p6,
     },
+    color="#74c476",
 )
 
 # LO cross section, needed for scaling to NNLO:
@@ -1796,6 +1841,7 @@ w_lnu_1j = w_lnu.add_process(
     name="w_lnu_1j",
     id=610010,
     label=rf"{w_lnu.label[:-1]}, 1j)",
+    color="#31a354",
     aux={
         "njets": (1, 2),
     },
@@ -1805,6 +1851,7 @@ w_lnu_2j = w_lnu.add_process(
     name="w_lnu_2j",
     id=610020,
     label=rf"{w_lnu.label[:-1]}, 2j)",
+    color="#238b45",
     aux={
         "njets": (2, 3),
     },
@@ -2011,6 +2058,7 @@ vv = Process(
     name="vv",
     id=8000,
     label="Di-Boson",
+    color="#80cdc1",
 )
 
 # ZZ 13 TeV xsec values at nNNLO from
@@ -2025,6 +2073,7 @@ zz = vv.add_process(
         # of XSDB values at https://xsdb-temp.app.cern.ch/xsdb/?columns=67108863&currentPage=0&pageSize=40&searchQuery=process_name%3D%5EZZ_TuneCP5_13.%2Bpythia8%24  # noqa
         13.6: Number(24.97, {"scale": (0.029j, 0.027j)}) * (12.75 / 12.14),
     },
+    color="#01665e",
 )
 
 zz_zqq_zll = zz.add_process(
@@ -2082,6 +2131,7 @@ wz = vv.add_process(
             "tot": 0.005941,  # xsdb: Number(29.1, {"tot": 0.1318}),
         }),
     },
+    color="#5ab4ac",
 )
 
 wz_wlnu_zll = wz.add_process(
@@ -2127,6 +2177,7 @@ ww = vv.add_process(
             "tot": 0.01677,  # xsdb: Number(80.23, {"tot": 0.3733})
         }),
     },
+    color="#c7eae5",
 )
 
 # update vv cross section
@@ -2185,6 +2236,7 @@ vvv = Process(
     id=9000,
     label="Triple-Boson",
     # xsecs set below as sum over individual processes
+    color="#bdbdbd",
 )
 
 # based on GenXSecAnalyzer
@@ -2204,6 +2256,7 @@ zzz = vvv.add_process(
             "tot": 0.000007828,
         }),
     },
+    color="#525252"
 )
 
 # based on GenXSecAnalyzer
@@ -2240,6 +2293,7 @@ wwz = vvv.add_process(
             "tot": 0.00009482,
         }),
     },
+    color="#737373",
 )
 
 # based on GenXSecAnalyzer
@@ -2258,9 +2312,87 @@ www = vvv.add_process(
             "tot": 0.0001247,
         }),
     },
+    color="#969696",
 )
 
 # update vvv cross section
 for cme in [13]:
     vvv.set_xsec(cme, www.get_xsec(cme) + wwz.get_xsec(cme) + wzz.get_xsec(cme) + zzz.get_xsec(cme))
     
+# -------------------------
+# Cross-section extractor
+# -------------------------
+
+# import csv
+
+# # Your target list
+# process_names = [
+#     # DY->ll
+#     "dy",
+#     "dy_m10to50",
+#     "dy_m50toinf_0j",
+#     "dy_m50toinf_1j",
+#     "dy_m50toinf_2j",
+#     "dy_m50toinf",
+#     # W + jets
+#     "w_lnu",
+#     "w_lnu_1j",
+#     "w_lnu_2j",
+#     # vv
+#     "vv",
+#     "ww",
+#     "wz",
+#     "zz",
+#     # vvv
+#     "vvv",
+#     "www",
+#     "wwz",
+#     "zzz",
+# ]
+
+# def _is_process(obj) -> bool:
+#     # duck-typing for order.Process
+#     return hasattr(obj, "name") and hasattr(obj, "get_xsec") and hasattr(obj, "xsecs")
+
+# def _to_float(x):
+#     """Plain float from scinum.Number or numeric; None if unavailable."""
+#     try:
+#         return float(x)
+#     except Exception:
+#         for attr in ("nominal", "n", "value", "val"):
+#             if hasattr(x, attr):
+#                 try:
+#                     return float(getattr(x, attr))
+#                 except Exception:
+#                     pass
+#     return None
+
+# energy = 13.6
+# out_path = "used_xsecs.txt"
+
+# # Build registry from module globals
+# proc_map = {obj.name: obj for obj in globals().values() if _is_process(obj)}
+
+# # Collect rows
+# rows = []
+# for pname in process_names:
+#     p = proc_map.get(pname)
+#     if p is None:
+#         rows.append([pname, None, "Process not found"])
+#         continue
+#     try:
+#         v = p.get_xsec(energy)  # may raise if energy not present
+#     except Exception:
+#         v = None
+#     rows.append([pname, _to_float(v) if v is not None else None, ""])
+
+# # Write TSV
+# header = ["process", "xsec_13.6TeV_pb", "note"]
+# with open(out_path, "a", newline="") as f:
+#     w = csv.writer(f, delimiter="\t")
+#     w.writerow(header)
+#     w.writerows(rows)
+
+# print(f"Wrote {len(rows)} rows -> {out_path}")
+
+

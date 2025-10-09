@@ -1,86 +1,66 @@
 # coding: utf-8
+from __future__ import annotations
 
-"""
-EWK-related process definitions.
-
-Some DY processes contain phasespace ranges in auxiliary fields. Each each is inclusive in the lower
-bound and exclusive in the upper bound, i.e. (a, b) means a <= x < b:
-
-- mll: dilepton invariant mass range
-- ptll: dilepton pt range
-- njets: number of extra jets on generator level (mostly NLO)
-"""
-
-__all__ = [  
-"dy_tautau_nj","dy_tautau_m50toinf_0j", "dy_tautau_m50toinf_1j", "dy_tautau_m50toinf_2j",
+__all__ = [
+    "vh_htt","w_plus_h_htt_UU","w_minus_h_htt_UU","zh_htt_UU",
 ]
-
 
 from order import Process
 from scinum import Number
 
 import cmsdb.constants as const
-from cmsdb.util import multiply_xsecs
+from cmsdb.util import add_xsecs, DotDict, add_decay_process, add_sub_decay_process
 
-dy_tautau_nj = Process(
-    name="dy_tautau_nj",
-    id=161150,
-    label="Z/γ*→ττ",
+####################################################################################################
+#
+# WH subprocesses
+#
+####################################################################################################
+
+vh_htt = Process(
+    name="vh_htt",
+    id=16100,
+    label="VH",
     xsecs={13.6: Number(0.1)},  
     color="#f768a1"
 )
 
-dy_tautau_m50toinf_0j = dy_tautau_nj.add_process(
-    name="dy_tautau_m50toinf_0j",
-    id=51650,
+# Higgs decay channels
+w_plus_h_htt_UU = vh_htt.add_process(
+    name="w_plus_h_htt_UU",
+    id=16101,
     xsecs={
-        13.6: Number(1664.684),
+        13.6: Number(0.05575),
     },
-    color="#b99ad9",  # light shade
-    aux={
-        "lep_id": 15,
-        "mll": (50.0, const.inf),
-    },
+   color="#f768a1", 
 )
 
-dy_tautau_m50toinf_1j = dy_tautau_nj.add_process(
-    name="dy_tautau_m50toinf_1j",
-    id=51651,
+w_minus_h_htt_UU = vh_htt.add_process(
+    name="w_minus_h_htt_UU",
+    id=16102,
     xsecs={
-        13.6: Number(316.240),
+        13.6: Number(0.03561),
     },
-    color="#8f63c9",  # medium shade
-    aux={
-        "lep_id": 15,
-        "mll": (50.0, const.inf),
-    },
+   color="#f768a1", 
 )
-
-dy_tautau_m50toinf_2j = dy_tautau_nj.add_process(
-    name="dy_tautau_m50toinf_2j",
-    id=51652,
+zh_htt_UU = vh_htt.add_process(
+    name="zh_htt_UU",
+    id=16103,
     xsecs={
-        13.6: Number(116.472),
+        13.6: Number(0.0592),
     },
-    color="#6a3fb8",  # dark shade
-    aux={
-        "lep_id": 15,
-        "mll": (50.0, const.inf),
-    },
+   color="#ce1256"
 )
-# -------------------------
-# Cross-section extractor
-# -------------------------
 
 # import csv
 
 # # Your target list
 # process_names = [
-#     # DY->tautau
-#     "dy_tautau_nj",
-#     "dy_tautau_m50toinf_0j",
-#     "dy_tautau_m50toinf_1j",
-#     "dy_tautau_m50toinf_2j",
+#     # vh_htt
+#     "vh_htt",
+#     "zh_htt_UU",
+#     "w_plus_h_htt_UU",
+#     "w_minus_h_htt_UU",
 # ]
 
 # def _is_process(obj) -> bool:

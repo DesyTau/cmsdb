@@ -111,10 +111,10 @@ dataset_rows = [
   ("WWZ_4F",                                                      ["/WWZ_4F"],                                                        5249916,  14,  515645709, "wwz"                  ),
   ("WZ",                                                          ["/WZ"],                                                           26722782,  26, 1690550817, "wz"                   ),
   ("WZZ",                                                         ["/WZZ"],                                                           5229208,  14,  363955451, "wzz"                  ),
-  ("WminusHto2Tau_UncorrelatedDecay_UnFiltered",                  ["/WminusHto2Tau_UncorrelatedDecay_UnFiltered"],                      63910,   1, 2986674282, "wh_htt"               ),
-  ("WplusHto2Tau_UncorrelatedDecay_UnFiltered",                   ["/WplusHto2Tau_UncorrelatedDecay_UnFiltered"],                       66154,   1, 2058886370, "wh_htt"               ),
+  ("WminusHto2Tau_UncorrelatedDecay_UnFiltered",                  ["/WminusHto2Tau_UncorrelatedDecay_UnFiltered"],                      63910,   1, 2986674282, "w_minus_h_htt_UU"     ),
+  ("WplusHto2Tau_UncorrelatedDecay_UnFiltered",                   ["/WplusHto2Tau_UncorrelatedDecay_UnFiltered"],                       66154,   1, 2058886370, "w_plus_h_htt_UU"      ),
   ("WtoLNu_amcatnloFXFX",                                         ["/WtoLNu_amcatnloFXFX"],                                         195475400, 261, 1538031583, "w_lnu"                ),
-  ("ZHto2Tau_UncorrelatedDecay_UnFiltered",                       ["/ZHto2Tau_UncorrelatedDecay_UnFiltered"],                           69650,   1, 1072228519, "zh_htt"               ),
+  ("ZHto2Tau_UncorrelatedDecay_UnFiltered",                       ["/ZHto2Tau_UncorrelatedDecay_UnFiltered"],                           69650,   1, 1072228519, "zh_htt_UU"            ),
   ("ZZ",                                                          ["/ZZ"],                                                            4043040,   4, 3513629804, "zz"                   ),
   ("ZZZ",                                                         ["/ZZZ"],                                                           5063206,  11,  493426600, "zzz"                  ),
 ]

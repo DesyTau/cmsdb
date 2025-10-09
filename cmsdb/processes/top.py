@@ -64,7 +64,7 @@ tt_sl = tt.add_process(
     id=1100,
     label=f"{tt.label}, SL",
     color=(205, 0, 9),
-    xsecs= {13.6 : 334.8*kfactor_ttbar,}
+    xsecs= {13.6 : 334.8*kfactor_ttbar,},
     # xsecs=multiply_xsecs(tt, const.br_ww.sl),
 )
 
@@ -220,6 +220,7 @@ st_twchannel_t_sl = st_twchannel_t.add_process(
     id=2211,
     xsecs={13.6 : 15.9}, 
     # multiply_xsecs(st_twchannel_t, const.br_ww.sl),
+    color="#3f2814",
 )
 
 st_twchannel_t_dl = st_twchannel_t.add_process(
@@ -227,11 +228,13 @@ st_twchannel_t_dl = st_twchannel_t.add_process(
     id=2212,
     xsecs={13.6 : 3.8}, 
     #multiply_xsecs(st_twchannel_t, const.br_ww.dl),
+    color="#55351c",
 )
 st_twchannel_t_fh = st_twchannel_t.add_process(
     name="st_twchannel_t_fh",
     id=2213,
     xsecs=multiply_xsecs(st_twchannel_t, const.br_ww.fh),
+    color="#996d3f",
 )
 
 st_twchannel_tbar = st_twchannel.add_process(
@@ -248,6 +251,7 @@ st_twchannel_tbar_sl = st_twchannel_tbar.add_process(
     id=2221,
     xsecs={13.6 : 15.9},
     # multiply_xsecs(st_twchannel_tbar, const.br_ww.sl),
+    color="#6b4424",
 )
 
 st_twchannel_tbar_dl = st_twchannel_tbar.add_process(
@@ -255,12 +259,14 @@ st_twchannel_tbar_dl = st_twchannel_tbar.add_process(
     id=2222,
     xsecs= {13.6 : 3.8},
     # multiply_xsecs(st_twchannel_tbar, const.br_ww.dl),
+    color="#7f552e",
 )
 
 st_twchannel_tbar_fh = st_twchannel_tbar.add_process(
     name="st_twchannel_tbar_fh",
     id=2223,
     xsecs=multiply_xsecs(st_twchannel_tbar, const.br_ww.fh),
+    color="#ad8a5c",
 )
 
 st_schannel = st.add_process(
@@ -560,10 +566,66 @@ ttvv.set_xsec(
     ttzz.get_xsec(13) + ttwz.get_xsec(13) + ttww.get_xsec(13),
 )
 
+# import csv
 
-# # List of top-level processes
-# processes = [tt, st, tt_fh, tt_dl, tt_sl, st_tchannel_t, st_tchannel_tbar, st_twchannel_t_sl, st_twchannel_tbar_sl, st_twchannel_t_dl, st_twchannel_tbar_dl, st_twchannel_t_fh, st_twchannel_tbar_fh]
+# # Your target list
+# process_names = [
+#     # single top
+#     "st",
+#     "st_twchannel_tbar_fh",
+#     "st_twchannel_t_fh",
+#     "st_twchannel_tbar_dl",
+#     "st_twchannel_tbar_sl",
+#     "st_twchannel_t_dl",
+#     "st_twchannel_t_sl",
+#     # tt
+#     "tt",
+#     "tt_dl",
+#     "tt_fh",
+#     "tt_sl",
+# ]
 
-# # Save the xsec values to 'top.txt' for energy 13.6 TeV
-# save_xsecs_to_file(processes, 'top.txt', 13.6)
+# def _is_process(obj) -> bool:
+#     # duck-typing for order.Process
+#     return hasattr(obj, "name") and hasattr(obj, "get_xsec") and hasattr(obj, "xsecs")
 
+# def _to_float(x):
+#     """Plain float from scinum.Number or numeric; None if unavailable."""
+#     try:
+#         return float(x)
+#     except Exception:
+#         for attr in ("nominal", "n", "value", "val"):
+#             if hasattr(x, attr):
+#                 try:
+#                     return float(getattr(x, attr))
+#                 except Exception:
+#                     pass
+#     return None
+
+# energy = 13.6
+# out_path = "used_xsecs.txt"
+
+# # Build registry from module globals
+# proc_map = {obj.name: obj for obj in globals().values() if _is_process(obj)}
+
+# # Collect rows
+# rows = []
+# for pname in process_names:
+#     p = proc_map.get(pname)
+#     if p is None:
+#         rows.append([pname, None, "Process not found"])
+#         continue
+#     try:
+#         v = p.get_xsec(energy)  # may raise if energy not present
+#     except Exception:
+#         v = None
+#     rows.append([pname, _to_float(v) if v is not None else None, ""])
+
+# # Write TSV
+# header = ["process", "xsec_13.6TeV_pb", "note"]
+# with open(out_path, "a", newline="") as f:
+#     w = csv.writer(f, delimiter="\t")
+#     w.writerow(header)
+#     w.writerows(rows)
+
+# print(f"Wrote {len(rows)} rows -> {out_path}")

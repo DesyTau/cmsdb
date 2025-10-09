@@ -521,7 +521,7 @@ h_ggf = h.add_process(
 )
 
 # Higgs decay channels
-h_ggf_htt = add_decay_process(h_ggf, h_decay_map.htt)
+h_ggf_htt = add_decay_process(h_ggf, h_decay_map.htt,color="#e377c2")
 h_ggf_hww = add_decay_process(h_ggf, h_decay_map.hww)
 h_ggf_hzz = add_decay_process(h_ggf, h_decay_map.hzz)
 h_ggf_hbb = add_decay_process(h_ggf, h_decay_map.hbb)
@@ -552,7 +552,10 @@ for mass in signal_masses:
     proc = h_ggf_htt.add_process(
         name=f"h_ggf_htt_{mass}",
         id=mass+10**8,
-        xsecs=h_ggf_htt_xsecs,
+    xsecs={
+        13: Number(1.0,),
+        13.6: Number(1.0,),  
+    },
     )
     # define a variable like h_ggf_htt_60, h_ggf_htt_65, …
     setattr(this_module, f"h_ggf_htt_{mass}", proc)
@@ -596,7 +599,7 @@ h_vbf = h.add_process(
 )
 
 # Higgs decay channels
-h_vbf_htt = add_decay_process(h_vbf, h_decay_map.htt)
+h_vbf_htt = add_decay_process(h_vbf, h_decay_map.htt,color="#c51b8a")
 h_vbf_hww = add_decay_process(h_vbf, h_decay_map.hww)
 h_vbf_hzz = add_decay_process(h_vbf, h_decay_map.hzz)
 h_vbf_hbb = add_decay_process(h_vbf, h_decay_map.hbb)
@@ -729,7 +732,7 @@ vh.xsecs = add_xsecs(zh, wph, wmh)
 
 
 # Higgs decay channels
-vh_htt = add_decay_process(vh, h_decay_map.htt)
+vh_htt = add_decay_process(vh, h_decay_map.htt,color="#dd3497")
 vh_hww = add_decay_process(vh, h_decay_map.hww)
 vh_hzz = add_decay_process(vh, h_decay_map.hzz)
 vh_hbb = add_decay_process(vh, h_decay_map.hbb)
@@ -896,7 +899,7 @@ vh_wqq_hzg_znunu = add_decay_process(vh_wqq_hzg, hzg_decay_map["znunu"])
 ####################################################################################################
 
 # Higgs decay channels
-zh_htt = add_decay_process(zh, h_decay_map.htt)
+zh_htt = add_decay_process(zh, h_decay_map.htt, color="#ce1256")
 zh_hww = add_decay_process(zh, h_decay_map.hww)
 zh_hzz = add_decay_process(zh, h_decay_map.hzz)
 zh_hbb = add_decay_process(zh, h_decay_map.hbb)
@@ -1455,7 +1458,10 @@ for mass in signal_masses:
     proc = bbh_htt.add_process(
         name=f"bbh_htt_{mass}",
         id=mass+1+10**8,
-        xsecs=bbh_htt_xsecs,
+        xsecs={
+            13: Number(1.0,),
+            13.6: Number(1.0,),  
+        },
     )
     # define a variable like bbh_htt_60, bbh_htt_65, …
     setattr(this_module, f"bbh_htt_{mass}", proc)
@@ -1528,3 +1534,57 @@ thb = h.add_process(
     },
     aux={"production_mode_parent": h},
 )
+
+# import csv
+
+# # Your target list
+# process_names = [
+#     # SM H->tautau
+#     "h_ggf_htt",
+#     "h_vbf_htt",
+# ]
+
+# def _is_process(obj) -> bool:
+#     # duck-typing for order.Process
+#     return hasattr(obj, "name") and hasattr(obj, "get_xsec") and hasattr(obj, "xsecs")
+
+# def _to_float(x):
+#     """Plain float from scinum.Number or numeric; None if unavailable."""
+#     try:
+#         return float(x)
+#     except Exception:
+#         for attr in ("nominal", "n", "value", "val"):
+#             if hasattr(x, attr):
+#                 try:
+#                     return float(getattr(x, attr))
+#                 except Exception:
+#                     pass
+#     return None
+
+# energy = 13.6
+# out_path = "used_xsecs.txt"
+
+# # Build registry from module globals
+# proc_map = {obj.name: obj for obj in globals().values() if _is_process(obj)}
+
+# # Collect rows
+# rows = []
+# for pname in process_names:
+#     p = proc_map.get(pname)
+#     if p is None:
+#         rows.append([pname, None, "Process not found"])
+#         continue
+#     try:
+#         v = p.get_xsec(energy)  # may raise if energy not present
+#     except Exception:
+#         v = None
+#     rows.append([pname, _to_float(v) if v is not None else None, ""])
+
+# # Write TSV
+# header = ["process", "xsec_13.6TeV_pb", "note"]
+# with open(out_path, "a", newline="") as f:
+#     w = csv.writer(f, delimiter="\t")
+#     w.writerow(header)
+#     w.writerows(rows)
+
+# print(f"Wrote {len(rows)} rows -> {out_path}")
