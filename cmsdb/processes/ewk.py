@@ -261,6 +261,7 @@ wp_lnu_xs_13p6 = const.n_leps * Number(12122.5, {
 #https://cms-generators.docs.cern.ch/useful-tools-and-links/HowToGenXSecAnalyzer/#during-the-production-of-mc-samples
 #curl https://raw.githubusercontent.com/cms-sw/genproductions/master/Utilities/calculateXSectionAndFilterEfficiency/genXsec_cfg.py -o ana.py
 #cmsRun ana.py inputFiles="/store/mc/Run3Summer22MiniAODv4/WtoLNu-4Jets_TuneCP5_13p6TeV_madgraphMLM-pythia8/MINIAODSIM/130X_mcRun3_2022_realistic_v5-v2/40000/87f20e33-c9b5-4a40-9056-532c201980bb.root" maxEvents=-1
+
 wj = w.add_process(
     name="wj",
     id=6001,
