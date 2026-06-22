@@ -12,4 +12,5 @@ from cmsdb.processes.ewk import *  # noqa
 from cmsdb.processes.qcd import *  # noqa
 from cmsdb.processes.higgs import *  # noqa
 from cmsdb.processes.httcp import *  # noqa
+from cmsdb.processes.bsm_higgs import *  # noqa
 #from cmsdb.processes.dy_tautau_nj import *  # noqa

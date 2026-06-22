@@ -12,11 +12,12 @@ bound and exclusive in the upper bound, i.e. (a, b) means a <= x < b:
 """
 
 __all__ = [
-    "dy","dy_lep","dy_ll_m10to50",#"dy_z2mumu","dy_z2ee","dy_z2tautau",
+    "dy","dy_lep", "dy_lep_m10to50",#"dy_z2mumu","dy_z2ee","dy_z2tautau",
     "dy_ll_m50","dy_ll_m50_0j","dy_ll_m50_1j","dy_ll_m50_2j",
     "dy_tt_m50","dy_tt_m50_0j","dy_tt_m50_1j","dy_tt_m50_2j",
     "w","wj","wj_1j","wj_2j","wj_3j","wj_4j",
     "vv","ww","wz","zz",
+    "vvv","www","wwz","wzz","zzz",
 ]
 
 
@@ -162,13 +163,13 @@ dy_tt_m50_2j = dy_tt_m50.add_process(
 
 
 
-# dy_lep_m10to50 = dy.add_process(
-#     name="dy_lep_m10to50",
-#     id=50001,
-#     label=rf"{dy.label} $Z \rightarrow ll$",
-#     xsecs={13: Number(5455.0*kfactor_dy), #FIXME Add proper number for 13TeV
-#         13.6: Number(5455.0*kfactor_dy)},
-# )
+dy_lep_m10to50 = dy_lep.add_process(
+    name="dy_lep_m10to50",
+    id=50001,
+    label=rf"{dy.label} $Z \rightarrow ll$",
+    xsecs={13: Number(5455.0*kfactor_dy), #FIXME Add proper number for 13TeV
+        13.6: Number(5455.0*kfactor_dy)},
+)
 
 
 # dy_z2mumu = dy_lep.add_process(
@@ -260,6 +261,7 @@ wp_lnu_xs_13p6 = const.n_leps * Number(12122.5, {
 #https://cms-generators.docs.cern.ch/useful-tools-and-links/HowToGenXSecAnalyzer/#during-the-production-of-mc-samples
 #curl https://raw.githubusercontent.com/cms-sw/genproductions/master/Utilities/calculateXSectionAndFilterEfficiency/genXsec_cfg.py -o ana.py
 #cmsRun ana.py inputFiles="/store/mc/Run3Summer22MiniAODv4/WtoLNu-4Jets_TuneCP5_13p6TeV_madgraphMLM-pythia8/MINIAODSIM/130X_mcRun3_2022_realistic_v5-v2/40000/87f20e33-c9b5-4a40-9056-532c201980bb.root" maxEvents=-1
+
 wj = w.add_process(
     name="wj",
     id=6001,
@@ -364,3 +366,86 @@ ww = vv.add_process(
 )
 
 
+#
+# Triple-boson
+#
+
+vvv = Process(
+    name="vvv",
+    id=9000,
+    label="Triple-Boson",
+    # xsecs set below as sum over individual processes
+)
+
+# based on GenXSecAnalyzer
+# for ZZZ_TuneCP5_13TeV-amcatnlo-pythia8 (Summer20UL16, NLO)
+# remark: calculated xsec has lower error for sample without ext-1 as not all events were used for calculation of ext-1
+# therefore the value for the sample without ext-1 is taken
+# using command ./calculateXSectionAndFilterEfficiency.sh -f datasets.txt -c RunIISummer20UL16MiniAODv2-106X_mcRun2_asymptotic_v17-v1 -n 5000000  # noqa
+zzz = vvv.add_process(
+    name="zzz",
+    id=9100,
+    xsecs={
+        13: Number(0.01476, {"tot": 2.347 * 10**(-6)}),
+        # 13.6 from GenXSecAnalyzer:
+        # similar values also found in http://cms.cern.ch/iCMS/jsp/openfile.jsp?tp=draft&files=AN2023_179_v6.pdf
+        # same value as xsdb obtained
+        13.6: Number(0.01591, {
+            "tot": 0.000007828,
+        }),
+    },
+)
+
+# based on GenXSecAnalyzer
+# for WZZ_TuneCP5_13TeV-amcatnlo-pythia8 (Summer20UL16, NLO, ext-1)
+# remark: calculated xsec is the same for simple sample and ext-1 sample
+# using command ./calculateXSectionAndFilterEfficiency.sh -f datasets.txt -c RunIISummer20UL16MiniAODv2-106X_mcRun2_asymptotic_v17_ext1-v1 -n 5000000  # noqa
+wzz = vvv.add_process(
+    name="wzz",
+    id=9200,
+    xsecs={
+        13: Number(0.05709, {"tot": 6.213 * 10**(-5)}),
+        # 13.6 from GenXSecAnalyzer:
+        # similar values also found in http://cms.cern.ch/iCMS/jsp/openfile.jsp?tp=draft&files=AN2023_179_v6.pdf
+        # same value as xsdb obtained
+        13.6: Number(0.06206, {
+            "tot": 0.00003689,
+        }),
+    },
+)
+
+# based on GenXSecAnalyzer
+# for WWZ_4F_TuneCP5_13TeV-amcatnlo-pythia8 (Summer20UL16, NLO, ext-1)
+# remark: calculated xsec is the same for simple sample and ext-1 sample
+# using command ./calculateXSectionAndFilterEfficiency.sh -f datasets.txt -c RunIISummer20UL16MiniAODv2-106X_mcRun2_asymptotic_v17_ext1-v1 -n 5000000  # noqa
+wwz = vvv.add_process(
+    name="wwz",
+    id=9300,
+    xsecs={
+        13: Number(0.1707, {"tot": 0.0001757}),
+        # 13.6 from GenXSecAnalyzer:
+        # similar values also found in http://cms.cern.ch/iCMS/jsp/openfile.jsp?tp=draft&files=AN2023_179_v6.pdf
+        # same value as xsdb obtained
+        13.6: Number(0.1851, {
+            "tot": 0.00009482,
+        }),
+    },
+)
+
+# based on GenXSecAnalyzer
+# for WWW_4F_TuneCP5_13TeV-amcatnlo-pythia8 (Summer20UL16, NLO, ext-1)
+# remark: calculated xsec is the same for simple sample and ext-1 sample
+# using command ./calculateXSectionAndFilterEfficiency.sh -f datasets.txt -c RunIISummer20UL16MiniAODv2-106X_mcRun2_asymptotic_v17_ext1-v1 -n 5000000  # noqa
+www = vvv.add_process(
+    name="www",
+    id=9400,
+    xsecs={
+        13: Number(0.2158, {"tot": 0.0002479}),
+        # 13.6 from GenXSecAnalyzer:
+        # similar values also found in http://cms.cern.ch/iCMS/jsp/openfile.jsp?tp=draft&files=AN2023_179_v6.pdf
+        # same value as xsdb obtained
+        13.6: Number(0.2328, {
+            "tot": 0.0001247,
+        }),
+    },
+)
