@@ -52,9 +52,9 @@ for mass, n_evt, n_files in [
     (3500,  1331800, 4),
 ]:
     cpn.add_dataset(
-        name=f"h_ggf_htt_{mass}",
+        name=f"ggphi_phitt_{mass}",
         id=mass+10**6,
-        processes=[procs.h_ggf_htt.get_process(f"h_ggf_htt_{mass}")],
+        processes=[procs.ggphi_phitt.get_process(f"ggphi_phitt_{mass}")],
         keys=[f"/GluGluHto2Tau_M_{mass}_2HDM_II"],
         n_files=n_files,
         n_events=n_evt,
@@ -105,9 +105,9 @@ for mass, n_evt, n_files in [
     (3500,  120850, 1),
 ]:
     cpn.add_dataset(
-        name = f"bbh_htt_{mass}",
+        name = f"bbphi_phitt_{mass}",
         id = mass+1+10**6,
-        processes=[procs.bbh_htt.get_process(f"bbh_htt_{mass}")],
+        processes=[procs.bbphi_phitt.get_process(f"bbphi_phitt_{mass}")],
         keys=[f"/BBHto2Tau_M_{mass}"],
         n_files=n_files,
         n_events=n_evt,

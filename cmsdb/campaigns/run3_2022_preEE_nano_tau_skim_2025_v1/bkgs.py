@@ -81,7 +81,7 @@ def add_merged_datasets(dataset_rows, cpn, procs):
 dataset_rows = [
   ("GluGluHto2Tau_UncorrelatedDecay_SM_UnFiltered_ProdAndDecay",  ["/GluGluHto2Tau_UncorrelatedDecay_SM_UnFiltered_ProdAndDecay"],    158678,   1, 2693954882, "h_ggf_htt_sm_prod_sm"            ),
   ("VBFHto2Tau_UncorrelatedDecay_UnFiltered",                     ["/VBFHto2Tau_UncorrelatedDecay_UnFiltered"],                        99878,   1,  896795747, "h_vbf_htt_sm"            ),
-  ("DYto2L_M_10to50_amcatnloFXFX",                                ["/DYto2L_M_10to50_amcatnloFXFX"],                                52363920,  48, 2602844442, "dy_ll_m10to50"           ),
+  ("DYto2L_M_10to50_amcatnloFXFX",                                ["/DYto2L_M_10to50_amcatnloFXFX"],                                52363920,  48, 2602844442, "dy_lep_m10to50"           ),
   ("DYto2L_M_50_0J_amcatnloFXFX",                                 ["/DYto2L_M_50_0J_amcatnloFXFX"],                                 70152268, 120, 2577421953, "dy_ll_m50_0j"       ),
   ("DYto2L_M_50_1J_amcatnloFXFX",                                 ["/DYto2L_M_50_1J_amcatnloFXFX"],                                 45431665, 171,  542870889, "dy_ll_m50_1j"       ),
   ("DYto2L_M_50_2J_amcatnloFXFX",                                 ["/DYto2L_M_50_2J_amcatnloFXFX"],                                 21946124, 154,  824633104, "dy_ll_m50_2j"       ),
@@ -112,10 +112,10 @@ dataset_rows = [
   ("TbarWplustoLNu2Q",                                            ["/TbarWplustoLNu2Q"],                                             4366325,  11, 3513411720, "st_twchannel_tbar_sl" ),
   ("TbarWplustoLNu2Q_ext1",                                       ["/TbarWplustoLNu2Q_ext1"],                                        4816386,  12, 2459022081, "st_twchannel_tbar_sl" ),
   ("WW",                                                          ["/WW"],                                                          15405496,  16, 2536448793, "ww"                   ),
-  #("WWW_4F",                                                      ["/WWW_4F"],                                                        372028,   1, 1602636030, "www"                 ),
-  #("WWZ_4F",                                                      ["/WWZ_4F"],                                                       1774030,   5, 2917961763, "wwz"                 ),
+  ("WWW_4F",                                                      ["/WWW_4F"],                                                        372028,   1, 1602636030, "www"                 ),
+  ("WWZ_4F",                                                      ["/WWZ_4F"],                                                       1774030,   5, 2917961763, "wwz"                 ),
   ("WZ",                                                          ["/WZ"],                                                           7479528,   8, 3919470500, "wz"                   ),
-  #("WZZ",                                                         ["/WZZ"],                                                          1806418,   5, 2297343689, "wzz"                 ),
+  ("WZZ",                                                         ["/WZZ"],                                                          1806418,   5, 2297343689, "wzz"                 ),
   ("WminusHto2Tau_UncorrelatedDecay_UnFiltered",                  ["/WminusHto2Tau_UncorrelatedDecay_UnFiltered"],                     27789,   1, 1056944567, "wmh_htt_flat"         ),
   ("WplusHto2Tau_UncorrelatedDecay_UnFiltered",                   ["/WplusHto2Tau_UncorrelatedDecay_UnFiltered"],                      28300,   1, 1400713916, "wph_htt_flat"         ),
   #("WtoLNu_amcatnloFXFX",                                         ["/WtoLNu_amcatnloFXFX"],                                         55638210,  84, 3758145551, "w_lnu"                ),
@@ -127,7 +127,7 @@ dataset_rows = [
   ("WtoLNu_4J_madgraphMLM",                                       ["/WtoLNu_4J_madgraphMLM"],                                        1463885,   3, 3758174557, "wj_4j"                   ),  
   ("ZHto2Tau_UncorrelatedDecay_UnFiltered",                       ["/ZHto2Tau_UncorrelatedDecay_UnFiltered"],                          28992,   1, 4033200945, "zh_htt_flat"          ),
   ("ZZ",                                                          ["/ZZ"],                                                           1181750,   2, 1546658281, "zz"                   ),
-  #("ZZZ",                                                         ["/ZZZ"],                                                          1751582,   4, 2151038362, "zzz"                 ),
+  ("ZZZ",                                                         ["/ZZZ"],                                                          1751582,   4, 2151038362, "zzz"                 ),
 ]
 
 def register_all_datasets(cpn, procs):

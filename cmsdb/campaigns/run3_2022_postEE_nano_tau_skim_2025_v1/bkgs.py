@@ -77,8 +77,10 @@ def add_merged_datasets(dataset_rows, cpn, procs):
 
 # ---- your datasets (name, key, n_evt, n_files, pid, proc) ----
 dataset_rows = [
+  ("GluGluHto2Tau_UncorrelatedDecay_SM_UnFiltered_ProdAndDecay",  ["/GluGluHto2Tau_UncorrelatedDecay_SM_UnFiltered_ProdAndDecay"],     445092,   1, 1221936734, "h_ggf_htt_sm_prod_sm"  ),
+  ("VBFHto2Tau_UncorrelatedDecay_UnFiltered",                     ["/VBFHto2Tau_UncorrelatedDecay_UnFiltered"],                        396754,   1, 3201507122, "h_vbf_htt_sm"          ),
   #DY amc@nlo
-  ("DYto2L_M_10to50_amcatnloFXFX",                                ["/DYto2L_M_10to50_amcatnloFXFX"],                                168535477, 139, 1895014020, "dy_ll_m10to50"           ),
+  ("DYto2L_M_10to50_amcatnloFXFX",                                ["/DYto2L_M_10to50_amcatnloFXFX"],                                168535477, 139, 1895014020, "dy_lep_m10to50"           ),
   ("DYto2L_M_50_0J_amcatnloFXFX",                                 ["/DYto2L_M_50_0J_amcatnloFXFX"],                                 275262495, 425, 1078589252, "dy_ll_m50_0j"       ),
   ("DYto2L_M_50_1J_amcatnloFXFX",                                 ["/DYto2L_M_50_1J_amcatnloFXFX"],                                 151393596, 539, 4189203628, "dy_ll_m50_1j"       ),
   ("DYto2L_M_50_2J_amcatnloFXFX",                                 ["/DYto2L_M_50_2J_amcatnloFXFX"],                                  84618132, 560, 3905898197, "dy_ll_m50_2j"       ),
@@ -119,10 +121,13 @@ dataset_rows = [
   ("WZ",                                                          ["/WZ"],                                                           26722782,  26, 1690550817, "wz"                   ),
   ("ZZ",                                                          ["/ZZ"],                                                            4043040,   4, 3513629804, "zz"                   ),
   #triboson
-  # ("WZZ",                                                         ["/WZZ"],                                                           5229208,  14,  363955451, "wzz"                  ),
-  # ("ZZZ",                                                         ["/ZZZ"],                                                           5063206,  11,  493426600, "zzz"                  ),
-  # ("WWW_4F",                                                      ["/WWW_4F"],                                                        1345746,   4, 3973511632, "www"                  ),
-  # ("WWZ_4F",                                                      ["/WWZ_4F"],                                                        5249916,  14,  515645709, "wwz"                  ),
+  ("WZZ",                                                         ["/WZZ"],                                                           5229208,  14,  363955451, "wzz"                  ),
+  ("ZZZ",                                                         ["/ZZZ"],                                                           5063206,  11,  493426600, "zzz"                  ),
+  ("WWW_4F",                                                      ["/WWW_4F"],                                                        1345746,   4, 3973511632, "www"                  ),
+  ("WWZ_4F",                                                      ["/WWZ_4F"],                                                        5249916,  14,  515645709, "wwz"                  ),
+  ("WminusHto2Tau_UncorrelatedDecay_UnFiltered",                  ["/WminusHto2Tau_UncorrelatedDecay_UnFiltered"],                      63910,   1, 2986674282, "wmh_htt_flat"     ),
+  ("WplusHto2Tau_UncorrelatedDecay_UnFiltered",                   ["/WplusHto2Tau_UncorrelatedDecay_UnFiltered"],                       66154,   1, 2058886370, "wph_htt_flat"      ),
+  ("ZHto2Tau_UncorrelatedDecay_UnFiltered",                       ["/ZHto2Tau_UncorrelatedDecay_UnFiltered"],                           69650,   1, 1072228519, "zh_htt_flat"            ),
 ]
 
 add_merged_datasets(dataset_rows, cpn, procs)

@@ -33,7 +33,7 @@ from scinum import Number
 import cmsdb.constants as const
 from cmsdb.util import add_xsecs, DotDict, add_decay_process, add_sub_decay_process
 
-from cmsdb.processes.higgs import h_ggf_htt, h_vbf_htt, wh_htt, zh_htt
+from cmsdb.processes.higgs import h_ggf_htt, h_vbf_htt, wh_htt, zh_htt, vh_htt
 
 h_ggf_htt_xsecs = {
         ecm: h_ggf_htt.get_xsec(ecm) 
@@ -195,7 +195,57 @@ h_vbf_htt_flat = h_vbf_htt.add_process(
     xsecs = h_vbf_htt_xsecs,
 )
 
-### WH processes ###       
+### WH processes ###  
+
+#VH xsecs
+
+wph_htt_xsecs = { 
+        13.6: Number(0.8889, {  # value for mH=125 GeV
+            "scale": (0.004j, 0.007j),
+            "pdf": 0.018j,
+        }),  #https://arxiv.org/pdf/2402.09955
+}
+wmh_htt_xsecs = { 
+        13.6: Number(0.5677, {  # value for mH=125 GeV
+            "scale": (0.004j, 0.007j),
+            "pdf": 0.018j,
+        }),  #https://arxiv.org/pdf/2402.09955
+} 
+
+zh_htt_xsecs = {
+        ecm: zh_htt.get_xsec(ecm) 
+        for ecm in zh_htt.xsecs.keys()
+}#https://arxiv.org/pdf/2402.09955
+  
+#VH flat processes 
+  
+wh_htt_flat = wh_htt.add_process(
+    name="wh_htt_flat",
+    label=r"$W(H\rightarrow\tau\tau)$",
+    id=16986,
+)
+
+wph_htt_flat = vh_htt.add_process(
+    name="wph_htt_flat",
+    label=r"$W^{+}(H\rightarrow\tau\tau)$",
+    id=16996,
+    xsecs = wph_htt_xsecs,
+)
+
+wmh_htt_flat = vh_htt.add_process(
+    name="wmh_htt_flat",
+    label=r"$W^{-}(H\rightarrow\tau\tau)$",
+    id=16992,
+    xsecs = wmh_htt_xsecs,
+)
+
+zh_htt_flat = vh_htt.add_process(
+    name="zh_htt_flat",
+    label=r"$Z(H\rightarrow\tau\tau)$",
+    id=14996,
+    xsecs = zh_htt_xsecs,
+)
+
 #W^+ H
 
 wh_htt_cpo = wh_htt.add_process(
@@ -216,20 +266,7 @@ wh_htt_mm = wh_htt.add_process(
     id=16987,
 )
 
-wh_htt_flat = wh_htt.add_process(
-    name="wh_htt_flat",
-    label=r"$W(H\rightarrow\tau\tau), flat$",
-    id=16986,
-)
 #W^- H
-
-
-wph_htt_xsecs = { 
-        13.6: Number(0.8889, {  # value for mH=125 GeV
-            "scale": (0.004j, 0.007j),
-            "pdf": 0.018j,
-        }),  #https://arxiv.org/pdf/2402.09955
-}
 
 wph_htt_cpo = wh_htt_cpo.add_process(
     name="wph_htt_cpo",
@@ -252,20 +289,8 @@ wph_htt_mm = wh_htt_mm.add_process(
     xsecs = wph_htt_xsecs,
 )
 
-wph_htt_flat = wh_htt_flat.add_process(
-    name="wph_htt_flat",
-    label=r"$W^{+}(H\rightarrow\tau\tau), flat$",
-    id=16996,
-    xsecs = wph_htt_xsecs,
-)
-#W^- H
 
-wmh_htt_xsecs = { 
-        13.6: Number(0.5677, {  # value for mH=125 GeV
-            "scale": (0.004j, 0.007j),
-            "pdf": 0.018j,
-        }),  #https://arxiv.org/pdf/2402.09955
-}
+#W^- H
 
 wmh_htt_cpo = wh_htt_cpo.add_process(
     name="wmh_htt_cpo",
@@ -288,18 +313,7 @@ wmh_htt_mm = wh_htt_mm.add_process(
     xsecs = wmh_htt_xsecs,
 )
 
-wmh_htt_flat = wh_htt_flat.add_process(
-    name="wmh_htt_flat",
-    label=r"$W^{-}(H\rightarrow\tau\tau), flat$",
-    id=16992,
-    xsecs = wmh_htt_xsecs,
-)
-
 ### ZH processes ###       
-zh_htt_xsecs = {
-        ecm: zh_htt.get_xsec(ecm) 
-        for ecm in zh_htt.xsecs.keys()
-}#https://arxiv.org/pdf/2402.09955
 
 zh_htt_cpo = zh_htt.add_process(
     name="zh_htt_cpo",
@@ -325,12 +339,6 @@ zh_htt_mm = zh_htt.add_process(
     xsecs = zh_htt_xsecs,
 )
 
-zh_htt_flat = zh_htt.add_process(
-    name="zh_htt_flat",
-    label=r"$Z(H\rightarrow\tau\tau), flat$",
-    id=14996,
-    xsecs = zh_htt_xsecs,
-)
 
 
 
