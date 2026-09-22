@@ -14,6 +14,8 @@ bound and exclusive in the upper bound, i.e. (a, b) means a <= x < b:
 __all__ = [
     "dy","dy_lep", "dy_lep_m10to50",#"dy_z2mumu","dy_z2ee","dy_z2tautau",
     "dy_ll_m50","dy_ll_m50_0j","dy_ll_m50_1j","dy_ll_m50_2j",
+    "dy_ee_m10to50","dy_ee_m50","dy_ee_m50_0j","dy_ee_m50_1j","dy_ee_m50_2j",
+    "dy_mumu_m10to50","dy_mumu_m50","dy_mumu_m50_0j","dy_mumu_m50_1j","dy_mumu_m50_2j",
     "dy_tt_m50","dy_tt_m50_0j","dy_tt_m50_1j","dy_tt_m50_2j",
     "w","wj","wj_1j","wj_2j","wj_3j","wj_4j",
     "vv","ww","wz","zz",
@@ -104,6 +106,92 @@ dy_ll_m50_2j = dy_ll_m50.add_process(
     },
 )
 
+### DY to ee ###
+
+dy_ee_m10to50 = dy.add_process(
+    name="dy_ee_m10to50",
+    id=51400,
+    label=rf"$Z \rightarrow ee, m < 50$",
+    xsecs={13.6: Number(21170, {"tot": 65.60})* kfactor_dy /3},
+    aux={
+        "mll": (10.0, 50.0),
+    },
+)
+
+dy_ee_m50 = dy.add_process(
+    name="dy_ee_m50",
+    id=51450,
+    label=rf"$Z \rightarrow ee$",
+    color="#b9ac70",
+)
+
+dy_ee_m50_0j = dy_ee_m50.add_process(
+    name="dy_ee_m50_0j",
+    id=51451,
+    xsecs={
+        13.6: Number(5377,{"tot": 15.09}) * kfactor_dy /3.,
+    },
+)
+
+dy_ee_m50_1j = dy_ee_m50.add_process(
+    name="dy_ee_m50_1j",
+    id=51452,
+    xsecs={
+        13.6: Number(1036, {"tot": 63.32}) * kfactor_dy /3., 
+    },
+)
+
+dy_ee_m50_2j = dy_ee_m50.add_process(
+    name="dy_ee_m50_2j",
+    id=51453,
+    xsecs={
+        13.6: Number(375.8, {"tot": 6.895}) * kfactor_dy /3., 
+    },
+)
+
+### DY to mumu ###
+
+dy_mumu_m10to50 = dy.add_process(
+    name="dy_mumu_m10to50",
+    id=51500,
+    label=rf"$Z \rightarrow \mu\mu, m < 50$",
+    xsecs={13.6: Number(21170, {"tot": 65.60})* kfactor_dy /3},
+    aux={
+        "mll": (10.0, 50.0),
+    },
+)
+
+dy_mumu_m50 = dy.add_process(
+    name="dy_mumu_m50",
+    id=51550,
+    label=rf"$Z \rightarrow \mu\mu$",
+    color="#b9ac70",
+)
+
+dy_mumu_m50_0j = dy_mumu_m50.add_process(
+    name="dy_mumu_m50_0j",
+    id=51551,
+    xsecs={
+        13.6: Number(5377,{"tot": 15.09}) * kfactor_dy /3.,
+    },
+)
+
+dy_mumu_m50_1j = dy_mumu_m50.add_process(
+    name="dy_mumu_m50_1j",
+    id=51552,
+    xsecs={
+        13.6: Number(1036, {"tot": 63.32}) * kfactor_dy /3., 
+    },
+)
+
+dy_mumu_m50_2j = dy_mumu_m50.add_process(
+    name="dy_mumu_m50_2j",
+    id=51553,
+    xsecs={
+        13.6: Number(375.8, {"tot": 6.895}) * kfactor_dy /3., 
+    },
+)
+
 ### DY to TauTau ###
 
 dy_tt_m50 = dy.add_process(
@@ -164,11 +252,11 @@ dy_tt_m50_2j = dy_tt_m50.add_process(
 
 
 dy_lep_m10to50 = dy_lep.add_process(
-    name="dy_lep_m10to50",
-    id=50001,
-    label=rf"{dy.label} $Z \rightarrow ll$",
-    xsecs={13: Number(5455.0*kfactor_dy), #FIXME Add proper number for 13TeV
-        13.6: Number(5455.0*kfactor_dy)},
+   name="dy_lep_m10to50",
+   id=50001,
+   label=rf"{dy.label} $Z \rightarrow ll$",
+#    xsecs={13: Number(5455.0*kfactor_dy), #FIXME Add proper number for 13TeV
+#        13.6: Number(5455.0*kfactor_dy)},
 )
 
 
