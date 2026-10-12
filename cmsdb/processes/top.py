@@ -8,7 +8,7 @@ __all__ = [
     "tt",
     "tt_sl", "tt_dl", "tt_fh",
     "st",
-    "st_tchannel", "st_tchannel_t", "st_tchannel_tbar",
+    "st_tchannel", "st_tchannel_t", "st_tchannel_t_had", "st_tchannel_t_lep", "st_tchannel_tbar", "st_tchannel_tbar_had", "st_tchannel_tbar_lep",
     "st_twchannel", "st_twchannel_t", "st_twchannel_tbar",
     "st_twchannel_t_sl", "st_twchannel_tbar_sl",
     "st_twchannel_t_dl", "st_twchannel_tbar_dl",
@@ -151,15 +151,26 @@ st_tchannel_t = st_tchannel.add_process(
             E_beam=0.2,
             integration=0.1,
         )),
-        13.6 : 123.8,
-        # 13.6: Number(145.0, dict(
-        #     scale=(1.7, 1.1),
-        #     pdf=(2.3, 1.5),  # includes alpha_s
-        #     mtop=(1.3, 0.9),
-        #     E_beam=(0.4, 0.3),
-        #     integration=0.1,)),
-        
+        #13.6 : 123.8,
+        13.6: Number(145.0, dict(
+            scale=(1.7, 1.1),
+            pdf=(2.3, 1.5),  # includes alpha_s
+            mtop=(1.3, 0.9),
+            E_beam=(0.3, 0.4),
+            integration=0.1,)),
     },
+)
+
+st_tchannel_t_had = st_tchannel_t.add_process(
+    name="st_tchannel_t_had",
+    id=2111,
+    xsecs=multiply_xsecs(st_tchannel_t, const.br_w.had),
+)
+
+st_tchannel_t_lep = st_tchannel_t.add_process(
+    name="st_tchannel_t_lep",
+    id=2112,
+    xsecs=multiply_xsecs(st_tchannel_t, const.br_w.lep),
 )
 
 st_tchannel_tbar = st_tchannel.add_process(
@@ -173,15 +184,27 @@ st_tchannel_tbar = st_tchannel.add_process(
             E_beam=(0.2, 0.1),
             integration=0.1,
         )),
-        13.6 : 75.47,
-        # 13.6: Number(87.2, dict(
-        #     scale=(0.9, 0.8),
-        #     pdf=(1.5, 1.3),  # includes alpha_s
-        #     mtop=(0.6, 0.7),
-        #     E_beam=(0.2, 0.2),
-        #     integration=0.1,
-        # )),
+        #13.6 : 75.47,
+        13.6: Number(87.2, dict(
+            scale=(0.9, 0.8),
+            pdf=(1.5, 1.3),  # includes alpha_s
+            mtop=(0.6, 0.7),
+            E_beam=(0.2, 0.2),
+            integration=0.1,
+        )),
     },
+)
+
+st_tchannel_tbar_had = st_tchannel_tbar.add_process(
+    name="st_tchannel_tbar_had",
+    id=2121,
+    xsecs=multiply_xsecs(st_tchannel_tbar, const.br_w.had),
+)
+
+st_tchannel_tbar_lep = st_tchannel_t.add_process(
+    name="st_tchannel_tbar_lep",
+    id=2122,
+    xsecs=multiply_xsecs(st_tchannel_tbar, const.br_w.lep),
 )
 
 st_twchannel = st.add_process(
@@ -218,7 +241,7 @@ st_twchannel_t = st_twchannel.add_process(
 st_twchannel_t_sl = st_twchannel_t.add_process(
     name="st_twchannel_t_sl",
     id=2211,
-    xsecs={13.6 : 15.9}, 
+    xsecs={13.6 : 15.8}, 
     # multiply_xsecs(st_twchannel_t, const.br_ww.sl),
 )
 
